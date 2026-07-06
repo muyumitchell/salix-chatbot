@@ -113,12 +113,11 @@ function addChips() {
   chipsWrap.className = 'chips';
   chipsWrap.id = 'chips';
 
-  const suggestions = [
-    'What does KNS do?',
-    'Cybersecurity services',
-    'Contact the team'
-  ];
-
+const suggestions = [
+  'What does SALIX Data do?',
+  'AI & Automation services',
+  'Contact the team'
+];
   suggestions.forEach(text => {
     const chip = document.createElement('span');
     chip.className = 'chip';
@@ -248,7 +247,7 @@ function openChat() {
   // First time opening — show greeting + chips
   if (!chatOpened) {
     chatOpened = true;
-    addMessage("Hey there 👋 I'm Kova, your guide to everything Konvergenz. What can I help you with?", 'bot');
+    addMessage("Hey there 👋 I'm Sage, your guide to everything SALIX Data. What can I help you with?", 'bot');
     addChips();
   }
 }
