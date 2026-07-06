@@ -1,6 +1,5 @@
 // ── CONFIG ──
-const BACKEND_URL = 'http://localhost:3000/chat'; // will update once deployed to Render
-
+const BACKEND_URL = 'https://salix-chatbot-backend.onrender.com/chat';
 
 // Generate floating particles for background
 const pageBg = document.getElementById('pageBg');
