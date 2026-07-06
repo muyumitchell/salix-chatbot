@@ -320,7 +320,7 @@ leadSubmit.addEventListener('click', () => {
   message: message
 })
   .then(() => {
-    leadStatus.textContent = 'Thanks! KNS will be in touch soon 🎉';
+   leadStatus.textContent = 'Thanks! SALIX Data will be in touch soon 🎉';
     leadStatus.className = 'lead-status success';
     leadName.value = '';
     leadEmail.value = '';
