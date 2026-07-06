@@ -167,7 +167,7 @@ async function sendMessage(text) {
   // Detect cold start — if no response chunk arrives within 3 seconds,
   // show a "waking up" message so the wait doesn't look broken
   let wakingUpTimeout = setTimeout(() => {
-    msgEl.innerHTML = `<em style="opacity:0.6;">Waking up Kova's servers, just a moment... ⏳</em>`;
+    msgEl.innerHTML = `<em style="opacity:0.6;">Waking up Sage's servers, just a moment... ⏳</em>`;
   }, 3000);
 
   try {

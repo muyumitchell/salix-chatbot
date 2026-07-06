@@ -10,7 +10,7 @@ const app = express();
 const groq = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
 const allowedOrigins = [
-  'https://YOUR-SALIX-NETLIFY-URL.netlify.app', // update once deployed
+  'https://clever-clafoutis-cca8e4.netlify.app',
   'http://127.0.0.1:5500',
   'http://localhost:5500'
 ];
