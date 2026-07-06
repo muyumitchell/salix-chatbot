@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sage — SALIX Data Virtual Assistant</title>
+  <link rel="stylesheet" href="style.css" />
+  <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+
+  <!-- BACKGROUND -->
+  <div class="page-bg" id="pageBg">
+    <div class="grid"></div>
+    <div class="orb orb1"></div>
+    <div class="orb orb2"></div>
+
+    <div class="brand">SALIX<span> DATA</span></div>
+    <div class="ticker-wrap">
+      <div class="ticker-track">
+        <span>AUTOMATION</span>
+        <span>•</span>
+        <span>AI-POWERED</span>
+        <span>•</span>
+        <span>DATA-DRIVEN</span>
+        <span>•</span>
+        <span>AUTOMATION</span>
+        <span>•</span>
+        <span>AI-POWERED</span>
+        <span>•</span>
+        <span>DATA-DRIVEN</span>
+        <span>•</span>
+      </div>
+    </div>
+
+    <div class="footer-tag">MAKING DATA MEANINGFUL SINCE 1999</div>
+  </div>
+
+  <!-- FLOATING BUBBLE BUTTON -->
+  <div class="bubble-wrap">
+    <div class="bubble-label">Chat with Sage 👋</div>
+    <button class="bubble-btn" id="bubbleBtn" aria-label="Chat with Sage">
+      <span class="bubble-icon">💬</span>
+      <span class="unread-badge" id="unreadBadge">1</span>
+    </button>
+  </div>
+
+  <!-- CHAT WINDOW -->
+  <div class="chat-window" id="chatWindow">
+
+    <!-- HEADER -->
+    <div class="chat-header">
+      <div class="kova-avatar">S</div>
+      <div class="header-text">
+        <div class="header-name">Sage</div>
+        <div class="header-sub">
+          <span class="dot"></span>
+          <span>SALIX Data Assistant</span>
+        </div>
+      </div>
+      <div class="kns-logo-text">SALIX</div>
+      <button class="close-btn" id="closeBtn" aria-label="Close chat">✕</button>
+    </div>
+
+    <!-- MESSAGES -->
+    <div class="messages" id="messages"></div>
+
+    <!-- ESCALATION BAR -->
+    <div class="escalate-bar">
+      <span>Need a human instead?</span>
+      <button class="escalate-link" id="quoteBtn">Get a Quote →</button>
+    </div>
+
+    <!-- LEAD CAPTURE FORM (hidden by default) -->
+    <div class="lead-form-overlay" id="leadFormOverlay">
+      <div class="lead-form">
+        <div class="lead-form-header">
+          <span>Get a Quote from SALIX Data</span>
+          <button class="lead-form-close" id="leadFormClose">✕</button>
+        </div>
+        <input type="text" id="leadName" class="lead-input" placeholder="Your name" />
+        <input type="email" id="leadEmail" class="lead-input" placeholder="Your email" />
+        <textarea id="leadMessage" class="lead-input lead-textarea" placeholder="What do you need help with?"></textarea>
+        <button class="lead-submit" id="leadSubmit">Send Request</button>
+        <div class="lead-status" id="leadStatus"></div>
+      </div>
+    </div>
+
+    <!-- INPUT -->
+    <div class="write">
+      <div class="input-wrap">
+        <input
+          class="chat-input"
+          id="chatInput"
+          placeholder="Ask me anything about SALIX Data..."
+          autocomplete="off"
+        />
+        <button class="send-btn" id="sendBtn" aria-label="Send message">
+          <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg" fill="none" stroke-width="5" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M60.7,53.6,50,64.3m0,0L39.3,53.6M50,64.3V35.7m0,46.4A32.1,32.1,0,1,1,82.1,50,32.1,32.1,0,0,1,50,82.1Z"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-brand">
+      Powered by SALIX Data · salixdata.com
+    </div>
+
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

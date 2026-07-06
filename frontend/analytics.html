@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kova Analytics — KNS Chatbot</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: Helvetica, sans-serif;
+      background: linear-gradient(135deg, #0a0a1a 0%, #0d0d2b 50%, #1a0a0a 100%);
+      min-height: 100vh;
+      padding: 40px 20px;
+      color: rgba(255,255,255,0.9);
+    }
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+    h1 {
+      font-size: 28px;
+      margin-bottom: 6px;
+    }
+    h1 span { color: #c8102e; }
+    .subtitle {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      margin-bottom: 32px;
+    }
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin-bottom: 32px;
+    }
+    .stat-card {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .stat-value {
+      font-size: 32px;
+      font-weight: 700;
+      color: #c8102e;
+    }
+    .stat-label {
+      font-size: 12px;
+      color: rgba(255,255,255,0.4);
+      margin-top: 4px;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+    .section-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.8);
+    }
+    .question-list {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      overflow: hidden;
+    }
+    .question-item {
+      padding: 14px 18px;
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+    }
+    .question-item:last-child { border-bottom: none; }
+    .question-text {
+      font-size: 13.5px;
+      color: rgba(255,255,255,0.85);
+    }
+    .question-time {
+      font-size: 11px;
+      color: rgba(255,255,255,0.35);
+      white-space: nowrap;
+    }
+    .loading, .empty {
+      text-align: center;
+      color: rgba(255,255,255,0.4);
+      padding: 40px;
+      font-size: 13px;
+    }
+    .refresh-btn {
+      background: rgba(200,16,46,0.15);
+      border: 1px solid rgba(200,16,46,0.4);
+      color: #ff4d6a;
+      padding: 8px 16px;
+      border-radius: 10px;
+      font-size: 12px;
+      cursor: pointer;
+      margin-bottom: 24px;
+      font-family: Helvetica, sans-serif;
+    }
+    .refresh-btn:hover { background: rgba(200,16,46,0.3); color: #fff; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Kova <span>Analytics</span></h1>
+    <div class="subtitle">KNS Chatbot — conversation insights</div>
+
+    <button class="refresh-btn" onclick="loadAnalytics()">↻ Refresh Data</button>
+
+    <div class="stats-grid" id="statsGrid">
+      <div class="loading">Loading stats...</div>
+    </div>
+
+    <div class="section-title">Recent Questions</div>
+    <div class="question-list" id="questionList">
+      <div class="loading">Loading questions...</div>
+    </div>
+  </div>
+
+  <script>
+    const BACKEND_URL = 'https://kns-chatbot-backend.onrender.com/analytics';
+
+    async function loadAnalytics() {
+      const statsGrid = document.getElementById('statsGrid');
+      const questionList = document.getElementById('questionList');
+
+      statsGrid.innerHTML = '<div class="loading">Loading stats...</div>';
+      questionList.innerHTML = '<div class="loading">Loading questions...</div>';
+
+      try {
+        const response = await fetch(BACKEND_URL);
+        const data = await response.json();
+
+        // Render stats
+        statsGrid.innerHTML = `
+          <div class="stat-card">
+            <div class="stat-value">${data.totalConversations}</div>
+            <div class="stat-label">Total Questions Asked</div>
+          </div>
+        `;
+
+        // Render recent questions
+        if (data.recentQuestions.length === 0) {
+          questionList.innerHTML = '<div class="empty">No questions yet. Go chat with Kova!</div>';
+        } else {
+          questionList.innerHTML = data.recentQuestions.map(q => `
+            <div class="question-item">
+              <div class="question-text">${escapeHtml(q.question)}</div>
+              <div class="question-time">${formatTime(q.timestamp)}</div>
+            </div>
+          `).join('');
+        }
+
+      } catch (error) {
+        console.error('Error loading analytics:', error);
+        statsGrid.innerHTML = '<div class="loading">Failed to load data. Is the backend running?</div>';
+        questionList.innerHTML = '';
+      }
+    }
+
+    function escapeHtml(text) {
+      const div = document.createElement('div');
+      div.textContent = text;
+      return div.innerHTML;
+    }
+
+    function formatTime(isoString) {
+      const date = new Date(isoString);
+      return date.toLocaleString('en-US', {
+        month: 'short', day: 'numeric',
+        hour: '2-digit', minute: '2-digit'
+      });
+    }
+
+    loadAnalytics();
+  </script>
+</body>
+</html>
