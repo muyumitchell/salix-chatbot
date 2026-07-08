@@ -3,30 +3,20 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Kova Analytics — KNS Chatbot</title>
+  <title>Sage Analytics — SALIX Data Chatbot</title>
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
     body {
       font-family: Helvetica, sans-serif;
-      background: linear-gradient(135deg, #0a0a1a 0%, #0d0d2b 50%, #1a0a0a 100%);
+      background: linear-gradient(135deg, #0a1410 0%, #0d1f18 50%, #0a1a12 100%);
       min-height: 100vh;
       padding: 40px 20px;
       color: rgba(255,255,255,0.9);
     }
-    .container {
-      max-width: 900px;
-      margin: 0 auto;
-    }
-    h1 {
-      font-size: 28px;
-      margin-bottom: 6px;
-    }
-    h1 span { color: #c8102e; }
-    .subtitle {
-      color: rgba(255,255,255,0.4);
-      font-size: 13px;
-      margin-bottom: 32px;
-    }
+    .container { max-width: 900px; margin: 0 auto; }
+    h1 { font-size: 28px; margin-bottom: 6px; }
+    h1 span { color: #00A651; }
+    .subtitle { color: rgba(255,255,255,0.4); font-size: 13px; margin-bottom: 32px; }
     .stats-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
@@ -39,11 +29,7 @@
       border-radius: 14px;
       padding: 20px;
     }
-    .stat-value {
-      font-size: 32px;
-      font-weight: 700;
-      color: #c8102e;
-    }
+    .stat-value { font-size: 32px; font-weight: 700; color: #00A651; }
     .stat-label {
       font-size: 12px;
       color: rgba(255,255,255,0.4);
@@ -51,12 +37,7 @@
       text-transform: uppercase;
       letter-spacing: 1px;
     }
-    .section-title {
-      font-size: 15px;
-      font-weight: 600;
-      margin-bottom: 14px;
-      color: rgba(255,255,255,0.8);
-    }
+    .section-title { font-size: 15px; font-weight: 600; margin-bottom: 14px; color: rgba(255,255,255,0.8); }
     .question-list {
       background: rgba(255,255,255,0.04);
       border: 1px solid rgba(255,255,255,0.08);
@@ -72,25 +53,13 @@
       gap: 12px;
     }
     .question-item:last-child { border-bottom: none; }
-    .question-text {
-      font-size: 13.5px;
-      color: rgba(255,255,255,0.85);
-    }
-    .question-time {
-      font-size: 11px;
-      color: rgba(255,255,255,0.35);
-      white-space: nowrap;
-    }
-    .loading, .empty {
-      text-align: center;
-      color: rgba(255,255,255,0.4);
-      padding: 40px;
-      font-size: 13px;
-    }
+    .question-text { font-size: 13.5px; color: rgba(255,255,255,0.85); }
+    .question-time { font-size: 11px; color: rgba(255,255,255,0.35); white-space: nowrap; }
+    .loading, .empty { text-align: center; color: rgba(255,255,255,0.4); padding: 40px; font-size: 13px; }
     .refresh-btn {
-      background: rgba(200,16,46,0.15);
-      border: 1px solid rgba(200,16,46,0.4);
-      color: #ff4d6a;
+      background: rgba(0,166,81,0.15);
+      border: 1px solid rgba(0,166,81,0.4);
+      color: #3dd68c;
       padding: 8px 16px;
       border-radius: 10px;
       font-size: 12px;
@@ -98,13 +67,13 @@
       margin-bottom: 24px;
       font-family: Helvetica, sans-serif;
     }
-    .refresh-btn:hover { background: rgba(200,16,46,0.3); color: #fff; }
+    .refresh-btn:hover { background: rgba(0,166,81,0.3); color: #fff; }
   </style>
 </head>
 <body>
   <div class="container">
-    <h1>Kova <span>Analytics</span></h1>
-    <div class="subtitle">KNS Chatbot — conversation insights</div>
+    <h1>Sage <span>Analytics</span></h1>
+    <div class="subtitle">SALIX Data Chatbot — conversation insights</div>
 
     <button class="refresh-btn" onclick="loadAnalytics()">↻ Refresh Data</button>
 
@@ -119,7 +88,7 @@
   </div>
 
   <script>
-    const BACKEND_URL = 'https://kns-chatbot-backend.onrender.com/analytics';
+    const BACKEND_URL = 'https://salix-chatbot-backend.onrender.com/analytics';
 
     async function loadAnalytics() {
       const statsGrid = document.getElementById('statsGrid');
@@ -132,7 +101,6 @@
         const response = await fetch(BACKEND_URL);
         const data = await response.json();
 
-        // Render stats
         statsGrid.innerHTML = `
           <div class="stat-card">
             <div class="stat-value">${data.totalConversations}</div>
@@ -140,9 +108,8 @@
           </div>
         `;
 
-        // Render recent questions
         if (data.recentQuestions.length === 0) {
-          questionList.innerHTML = '<div class="empty">No questions yet. Go chat with Kova!</div>';
+          questionList.innerHTML = '<div class="empty">No questions yet. Go chat with Sage!</div>';
         } else {
           questionList.innerHTML = data.recentQuestions.map(q => `
             <div class="question-item">
