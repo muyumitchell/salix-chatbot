@@ -17,6 +17,7 @@ for (let i = 0; i < 18; i++) {
 const bubbleBtn = document.getElementById('bubbleBtn');
 const unreadBadge = document.getElementById('unreadBadge');
 const chatWindow = document.getElementById('chatWindow');
+const chatWindowWrap = document.getElementById('chatWindowWrap');
 const closeBtn = document.getElementById('closeBtn');
 const messagesEl = document.getElementById('messages');
 const chatInput = document.getElementById('chatInput');
@@ -27,7 +28,7 @@ let conversationHistory = [];   // sent to backend for context
 let chatOpened = false;         // tracks first open
 
 // ── START: chat window starts hidden ──
-chatWindow.classList.add('hidden');
+chatWindowWrap.classList.add('hidden');
 
 // ── HELPER: get current time like "10:42 AM" ──
 function getTime() {
@@ -237,7 +238,7 @@ async function sendMessage(text) {
 
 // ── EVENT: open chat ──
 function openChat() {
-  chatWindow.classList.remove('hidden');
+  chatWindowWrap.classList.remove('hidden');
   chatWindow.style.animation = 'none';
   chatWindow.offsetHeight; // force reflow so animation replays
   chatWindow.style.animation = 'bounce-in-right 1.1s both';
@@ -256,7 +257,7 @@ function openChat() {
 function closeChat() {
   chatWindow.style.animation = 'bounce-out-left 1.5s both';
   setTimeout(() => {
-    chatWindow.classList.add('hidden');
+    chatWindowWrap.classList.add('hidden');
   }, 1500);
 }
 
