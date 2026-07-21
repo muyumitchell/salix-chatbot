@@ -197,14 +197,16 @@ async function sendMessage(text) {
         try {
          const data = JSON.parse(dataStr);
           if (data.content) {
-            clearTimeout(wakingUpTimeout); // real content arrived, cancel the waking-up message
-            fullReply += data.content;
-            msgEl.innerHTML = formatMessage(fullReply);
-            messagesEl.scrollTop = messagesEl.scrollHeight;
-          }
-          if (data.error) {
-            msgEl.innerHTML = formatMessage(data.error);
-          }
+  clearTimeout(wakingUpTimeout);
+  fullReply += data.content;
+  msgEl.innerHTML = formatMessage(fullReply);
+  messagesEl.scrollTop = messagesEl.scrollHeight;
+}
+if (data.error) {
+  clearTimeout(wakingUpTimeout); // stop the waking-up message from overwriting this error
+  msgEl.innerHTML = formatMessage(data.error);
+}
+
         } catch (e) {
           // ignore parse errors on incomplete chunks
         }
